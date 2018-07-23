@@ -3,7 +3,7 @@ Arduino library for sending and recieving data between arduino's
 
 ## How Does it Work? ##
 
-**Inlcude**
+**INCLUDE**
 
 When you want to use the SerialUtil class, you have to include the SerialUtil header file at the top of youre Arduino sketch.
 
