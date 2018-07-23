@@ -11,7 +11,7 @@ When you want to use the SerialUtil class, you have to include the SerialUtil he
 #include "SerialUtil.h"
 ```
 
-**Declaration**
+**DECLARATION**
 
 You have to declare a variable of the SerialUtil class.
 
@@ -69,7 +69,7 @@ void loop() {
 }
 ```
 
-**Callbacks**
+**CALLBACK**
 
 When it's time to send the data to the other Arduino. The SerialUtil class calls the method you attachted in de setup.
 You can use the **sendFloat**, **sendInt**, **sendBool** and **sendText** method to send youre data to the other Arduino.
