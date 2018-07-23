@@ -1,0 +1,42 @@
+#######################################
+# Syntax Coloring Map For ExampleLibrary
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+SerialUtil	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+startMode	KEYWORD2
+comType	KEYWORD2
+loop	KEYWORD2
+setBaudrate	KEYWORD2
+changeBaudrate	KEYWORD2
+sendBool	KEYWORD2
+readBool	KEYWORD2
+sendInt	KEYWORD2
+readInt	KEYWORD2
+sendFloat	KEYWORD2
+readFloat	KEYWORD2
+sendText	KEYWORD2
+readText	KEYWORD2
+changeWaitTime	KEYWORD2
+setTimeOut	KEYWORD2
+setTimeChangeCom	KEYWORD2
+attachSend	KEYWORD2
+attachRecieve	KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+#######################################
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+MODE_SEND	LITERAL1 
+MODE_RECIEVE	LITERAL1
