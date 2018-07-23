@@ -30,29 +30,29 @@ You have to define at least the following methods to get the SerialUtil class wo
   - **attachSend(callback method)**: attach send callback when you want to send data
   - **attachRecieve(callback method)**: attach recieve callback when you want to recieve data
 
-In the next example codes, both sending and recieving is configured.
+In the next example codes, both sending and recieving are configured.
 If you only want to send data from one to another. It's enough to configere the sending part at one sketch and the recieving part in the other sketch.
 
 ```
 void setup() {
-  // Configure the baudrate of the serial communication
+  // Configure the baudrate of the serial communication.
   mySerial.setBaudrate(19200);
-  // Configure the wait time after data is send (a little pause)
+  // Configure the wait time between the different data sends (a little pause).
   mySerial.changeWaitTime(20);
-  // Configure the start communication mode
-  // You can't define the same start mode in both Arduino sketches
+  // Configure the start communication mode.
+  // You can't define the same start mode in both Arduino sketches.
   mySerial.startMode(MODE_SEND);
-  // Configure the communication type: send, recieve or send and recieve
+  // Configure the communication type: send, recieve or send and recieve.
   // .comType(enableSend, enableRecieve)
   mySerial.comType(true,true);
-  // Configure the timeout time
+  // Configure the timeout time for a new request.
   mySerial.setTimeOut(2000);
-  // Configure the time when the communication mode change from send => recieve or recieve => send
+  // Configure the time when the communication mode change from send to recieve or from recieve to send.
   mySerial.setTimeChangeCom(5000);
   
-  // Configure send callback method
+  // Configure the send callback method.
   mySerial.attachSend(sendMyData);
-  // Confige recieve callback method
+  // Confige the recieve callback method.
   mySerial.attachRecieve(recieveMyData);
 }
 ```
