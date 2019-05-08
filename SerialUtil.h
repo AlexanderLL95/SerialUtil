@@ -37,7 +37,7 @@
 
 /*
  * --- Send Mode ---
- *  0 => Recieve mode is active
+ *  0 => Receive mode is active
  *  1 => Sende mode is active
  *
  */
@@ -82,7 +82,7 @@ class SerialUtil {
     void setTimeOut(long timeOut);
     void setTimeChangeCom(long timeChangeCom);
     void attachSend(SendCb send);
-    void attachRecieve(RecieveCb recieve);
+    void attachRecieve(RecieveCb receive);
   private:
     void sendMode();
     void recieveMode();

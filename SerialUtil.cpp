@@ -3,7 +3,7 @@
  *
  * ---COMMUNICATION PROTOCOL---
  * (1) SENDER
- * (2) RECIEVER
+ * (2) RECEIVER
  *
  * (1)				                      (2)
  * STEP 0:        INIT
@@ -22,7 +22,7 @@
  * TX ----------------------------> RX
  *
  * TIMEOUT
- * If the sender get no respons (OK [$]) within the configured timeout from the reciever, it will ask again for confirmation.
+ * If the sender get no response (OK [$]) within the configured timeout from the receiver, it will ask again for confirmation.
  * - Step 2 => Step 1: send readyToSent code again
  * - Step 5 => Step 4: send end code again
  */
@@ -75,10 +75,10 @@ void SerialUtil::startMode(int comMode){
 /*
  * Define the communication type. They're three different options.
  * - SIMPLEX SEND; only sending data
- * - SIMPLEX RECIEVE: only recieven data
- * - HALF DUPLEX: sending and recieving data
+ * - SIMPLEX RECEIVE: only recieven data
+ * - HALF DUPLEX: sending and receiving data
  * @param enalbeSend : enable sending data
- * @param enableRecieve: enable recieving data
+ * @param enableRecieve: enable receiving data
  */
 void SerialUtil::comType(bool enableSend, bool enableRecieve){
   sendEnabled = enableSend;
@@ -103,7 +103,7 @@ void SerialUtil::setTimeOut(long timeOut){
 }
 
 /*
- * Define the time after the communicaition mode will be swithed.
+ * Define the time after the communicaition mode will be switched.
  * @param timeChangeCom: changeover time
  */
 void SerialUtil::setTimeChangeCom(long timeChangeCom){
@@ -123,7 +123,7 @@ void SerialUtil::loop(long millis){
   timeElapsed += (millis - timePrevious);
   timePrevious = millis;
 
-  //Determine the communication mode (send or recieve)
+  //Determine the communication mode (send or receive)
   if (comMode == MODE_SEND){
     sendMode();
   }else{
@@ -138,19 +138,19 @@ void SerialUtil::loop(long millis){
       Serial.println("MODE: SEND AGAIN");
     }
   }else if(!sendEnabled && recieveEnabled){
-    //SIMPLEX: RECIEVE
+    //SIMPLEX: RECEIVE
     if (!recieveBusy && recieveDone){
       comMode = MODE_RECIEVE;
       stepNr = R_INIT;
-      Serial.println("MODE: RECIEVE AGAIN");
+      Serial.println("MODE: RECEIVE AGAIN");
     }
   }else{
-    //HALF DUPLEX: SEND & RECIEVE
+    //HALF DUPLEX: SEND & RECEIVE
     if (!sendBusy && sendDone && timeElapsed > timeChangeCom){
       comMode = MODE_RECIEVE;
       stepNr = R_INIT;
       sendDone = false;
-      Serial.println("MODE: RECIEVE");
+      Serial.println("MODE: RECEIVE");
     }
   
     if (!recieveBusy && recieveDone && timeElapsed > timeChangeCom){
@@ -226,15 +226,15 @@ void SerialUtil::sendMode(){
   }
 }
 
-//---MARK: RECIEVE MODE---
+//---MARK: RECEIVE MODE---
 
 /*
- * This method handles the sequence of the recieve mode.
+ * This method handles the sequence of the receive mode.
  */
 void SerialUtil::recieveMode(){
   switch(stepNr){
     case R_INIT:
-      Serial.println("Recieve is STARTED");
+      Serial.println("Receive is STARTED");
       recieveBusy = true;
       recieveDone = false;
       stepNr += 1;
@@ -288,7 +288,7 @@ void SerialUtil::recieveMode(){
       recieveDone = true;
       timeElapsed = 0;
       stepNr += 1;
-      Serial.println("Recieve is DONE");
+      Serial.println("Receive is DONE");
       break;
      default:
       break;
@@ -383,7 +383,7 @@ float SerialUtil::readFloat() {
 
 /*
  * This method read a text from the other side.
- * @param: the definied length of the string. The amount of characters send with this text.
+ * @param: the defined length of the string. The amount of characters send with this text.
  * @return: value
  */
 String SerialUtil::readText(int length) {
@@ -394,7 +394,7 @@ String SerialUtil::readText(int length) {
 //---MARK: CALLBACK METHODS---
 
 /*
- * Attach the send method which will be definied in the Arduino project.
+ * Attach the send method which will be defined in the Arduino project.
  * This method will be called when it's time to send data.
  * @param sendCb: the send callback method.
  */
@@ -403,9 +403,9 @@ void SerialUtil::attachSend(SendCb sendCb){
 }
 
 /*
- * Attach the recieve method which will be definied in the Arduino project.
- * This method will be called when it's time to recieve data.
- * @param recieveCb: the recieve callback method.
+ * Attach the receive method which will be defined in the Arduino project.
+ * This method will be called when it's time to receive data.
+ * @param recieveCb: the receive callback method.
  */
 void SerialUtil::attachRecieve(RecieveCb recieveCb){
   this->recieveCb = recieveCb;
@@ -421,8 +421,8 @@ void SerialUtil::sendData(){
 }
 
 /*
- * Method is called when the recieve callback method must be called in the Arduino project.
- * @param sendCode: the unique code of the recieving data.
+ * Method is called when the receive callback method must be called in the Arduino project.
+ * @param sendCode: the unique code of the receiving data.
  */
 void SerialUtil::recieveData(int sendCode){
   if(recieveCb){
