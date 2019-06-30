@@ -1,5 +1,5 @@
 # SerialUtil
-Arduino library for sending and recieving data between arduino's
+Arduino library for sending and receiving data between arduino's
 
 ## How Does it Work? ##
 
@@ -28,10 +28,10 @@ You have to define at least the following methods to get the SerialUtil class wo
   - **startMode(startMode)**: MODE_SEND or MODE_RECIEVE
   - **comType(enableSend, enalbeRecieve)**: ex. comTyp(true,false) => only send data
   - **attachSend(callback method)**: attach send callback when you want to send data
-  - **attachRecieve(callback method)**: attach recieve callback when you want to recieve data
+  - **attachRecieve(callback method)**: attach receive callback when you want to receive data
 
-In the next example codes, both sending and recieving are configured.
-If you only want to send data from one to another. It's enough to configere the sending part at one sketch and the recieving part in the other sketch.
+In the next example codes, both sending and receiving are configured.
+If you only want to send data from one to another. It's enough to configere the sending part at one sketch and the receiving part in the other sketch.
 
 ```
 void setup() {
@@ -42,17 +42,17 @@ void setup() {
   // Configure the start communication mode.
   // You can't define the same start mode in both Arduino sketches.
   mySerial.startMode(MODE_SEND);
-  // Configure the communication type: send, recieve or send and recieve.
+  // Configure the communication type: send, receive or send and receive.
   // .comType(enableSend, enableRecieve)
   mySerial.comType(true,true);
   // Configure the timeout time for a new request.
   mySerial.setTimeOut(2000);
-  // Configure the time when the communication mode change from send to recieve or from recieve to send.
+  // Configure the time when the communication mode change from send to receive or from receive to send.
   mySerial.setTimeChangeCom(5000);
   
   // Configure the send callback method.
   mySerial.attachSend(sendMyData);
-  // Confige the recieve callback method.
+  // Confige the receive callback method.
   mySerial.attachRecieve(recieveMyData);
 }
 ```
@@ -71,7 +71,7 @@ void loop() {
 
 **CALLBACK**
 
-When it's time to send the data to the other Arduino. The SerialUtil class calls the method you attachted in de setup.
+When it's time to send the data to the other Arduino. The SerialUtil class calls the method you attached in de setup.
 You can use the **sendFloat**, **sendInt**, **sendBool** and **sendText** method to send youre data to the other Arduino.
 You have to give always a unique code to youre data.
 
@@ -91,7 +91,7 @@ void sendMyData(){
 }
 ```
 
-The library send a callback to you Arduino sketch when the SerialUtil class recieves the data.
+The library send a callback to you Arduino sketch when the SerialUtil class receives the data.
 The callback method has as parameter a unique send code. This is the same unique send code you sended with youre data.
 Call the properly method **readFloat**,**readInt**,**readBool** or **readText** to get youre value.
 
